@@ -1,0 +1,83 @@
+<!-- <div class="card" style="width: 18rem;">
+  <img src="{{productProp.productImgURl}}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{productProp.productName}}</h5>
+    <a href="#" class="btn btn-primary">add to cart</a>
+  </div>
+</div> -->
+
+<div class="container">
+  <form class="mt-2">
+    <!-- <input [value]="userName" type="text" class=" form-control" /> -->
+    <!-- two way binding [()]=" "  [(ngModel)]="prop"  [ngModelOptions]="{standalone: true}" -->
+    <!-- <input [(ngModel)]="FilterByName"  [ngModelOptions]="{standalone: true}"  type="text" class=" form-control" /> -->
+
+    <!-- <p>{{userName}}</p> -->
+  </form>
+  <p>totalorderPrice {{ totalOrderPrice }}</p>
+  <h2>{{ date | date : 'medium' }}</h2>
+  <div class="row">
+    @for(items of productsAfterSearch;track items.id ){
+    <div class="col-3">
+      <div appCardStyle color1="green" class="card" style="width: 18rem">
+        <!-- interpolation  {{prop}}-->
+        <!-- <img src="{{ items.productImgURl }}" class="card-img-top" alt="..." /> -->
+        <!-- property binding [att]="prop" -->
+        <img [src]="items.productImgURl" class="card-img-top" alt="..." />
+        <div class="card-body">
+          <!-- <h5 class="card-title">{{ items.productName }}</h5> -->
+          <!--class binding   ==> property bing [class.class]="cond" -->
+          <!-- <h5 class="card-title"[class.test]="items.productQuantity >0"  [class.text-danger]="items.productQuantity==0" >{{ items.productName }}</h5> -->
+          <!-- directives  [ngClass]="{'class':condi,'class2:' }"  -->
+          <!-- <h5 class="card-title"  [ngClass]="{'text-danger':items.productQuantity==0,'test':items.productQuantity >0}" >{{ items.productName }}</h5> -->
+
+          <!-- style binding  [style.propCss]="cond?if:else"-->
+          <!-- <h5 class="card-title" [style.boder]="" [style.color]="items.productQuantity==0?'red':'black'">{{ items.productName }}</h5> -->
+          <!-- ngStyle -->
+          <!-- <h5 class="card-title" [ngStyle]="{'color':(items.productQuantity==0)?'red':'blue'}">{{ items.productName }}</h5> -->
+          <h5 class="card-title">{{ items.productName | lowercase }}</h5>
+          <p class="text-decoration-line-through">
+            {{ items.productPrice | currency : 'EUR' : 'code' }}
+          </p>
+          <p>{{ items.productPrice | discount : 25 | currency : 'EUR' : 'code' }}</p>
+
+          <p>qty:{{ items.productQuantity }}</p>
+          @switch (items.productQuantity){ @case (0) {
+          <p class="text-danger">out of stock</p>
+          } @case (1) {
+          <p class="text-warning">last item in stock</p>
+
+          } @default {
+          <p class="text-success">in stock</p>
+
+          } }
+          <!-- <button href="#" class="btn btn-primary" [hidden]="items.productQuantity==0">add to cart</button> -->
+          <!-- <button href="#" class="btn btn-primary" [disabled]="items.productQuantity==0">add to cart</button> -->
+          <!-- @if(items.productQuantity==0){ out of stock }@else {
+          <button href="#" class="btn btn-primary">add to cart</button>
+
+          } -->
+
+          <!-- event binding  (event)="method()" -->
+          <!-- <button (click)="addtocart(items)" href="#" class="btn btn-primary">add to cart</button> -->
+
+          <div class="d-flex justify-content-between">
+            <!-- template reference  #ref -->
+            <!-- <input type="number" id="input"  class="form-control" #qtyRef />
+          <button (click)="addtocart(qtyRef.value,items.productPrice)" href="#" class="btn btn-primary">add to cart</button> -->
+            <!-- <button (click)="addToCartINChild(items)" href="#" class="btn btn-primary">
+              add to cart
+            </button> -->
+               <button [routerLink]="['/products/',items.id]" class="btn btn-primary">
+             Show
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    }@empty {
+    <p class="text-danger text-center">no products</p>
+    }
+  </div>
+</div>

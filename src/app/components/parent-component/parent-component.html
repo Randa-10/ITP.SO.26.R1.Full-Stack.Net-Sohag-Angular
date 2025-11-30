@@ -1,0 +1,52 @@
+
+
+<div class="container">
+  <p>parent-component works!</p>
+    <form class="mt-2">
+    <!-- <input [value]="userName" type="text" class=" form-control" /> -->
+     <!-- two way binding [()]=" "  [(ngModel)]="prop"  [ngModelOptions]="{standalone: true}" -->
+    <input [(ngModel)]="FilterByNameINParent"  [ngModelOptions]="{standalone: true}"  type="text" class=" form-control" />
+
+    <!-- <p>{{userName}}</p> -->
+  </form>
+</div>
+
+
+<!-- product child -->
+ <!-- 1-search  parent
+ 2-send parent to child ==> child.ts  @Input ()
+ 3-parent ==> selector child [propbindingChild]="valueparent" -->
+
+
+
+ <!-- @Outpu()
+ send data child to parent
+ 1-child ==> child.html evntclick 
+ 2-child.ts  i-create event ii-fire event
+ 3-parent ===> bind event (eventchild)="method($event)"
+ 
+ -->
+<app-products  (productEvent)="addToCartInParent($event)"   [FilterByNameInChild]="FilterByNameINParent"></app-products>
+
+<div class="container">
+  <table class="table table-dark table-striped">
+<thead>
+  <tr>
+    <th>name</th>
+
+    <th>price</th>
+
+  </tr>
+</thead>
+<tbody>
+  @for (i of prdListAarr ; track i.id) {
+      <tr>
+<td>{{i.productName}}</td>
+<td>{{i.productPrice}}</td>
+
+  </tr>
+
+  }
+</tbody>
+</table>
+</div>

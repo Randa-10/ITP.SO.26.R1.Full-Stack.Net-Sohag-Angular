@@ -1,0 +1,81 @@
+<div class="container mt-5">
+
+    <button class="btn btn-primary" [disabled]="isUserLogged" (click)="login()">login</button>
+         <button class="btn btn-danger" [disabled]="!isUserLogged" (click)="logout()">logout</button>
+    <div class="form-container">
+      <h3 class="form-header">Sign Up Form</h3>
+  
+      <form (ngSubmit)="AddNewUser()" [formGroup]="userFormGroup" #signup="ngForm" >
+        <!-- Name Input -->
+        <div class="mb-3">
+          <label for="name" class="form-label">First Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            placeholder="Enter your last name"
+            required
+       formControlName="name"
+       [ngClass]="
+       {'is-invalid':(nameMethod?.touched||nameMethod?.dirty)&&nameMethod?.invalid,
+        'is-valid':nameMethod?.valid
+       }"
+          />
+     <!-- <div class="invalid-feedback">
+        @if( nameMethod?.errors?.['required']){
+        <p>name is required</p>
+        }@else if (nameMethod?.errors?.['minlength']) {
+
+        <p>minlength at least 3 char</p>
+        }
+      </div> -->
+        </div>
+     
+        <!-- Email Input -->
+        <div class="mb-3">
+          <label for="email" class="form-label">Email Address</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            placeholder="Enter your email"
+            required
+           formControlName="email"
+            name="email"
+          />
+        </div>
+  
+        <!-- Password Input -->
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            placeholder="Enter your password"
+            required
+         
+            name="password"
+            formControlName="password"
+          />
+        </div>
+      
+        <!-- Submit Button -->
+        <button
+          type="submit"
+          class="btn btn-custom w-100"
+       [disabled]="signup.invalid"
+        >
+          Submit
+        </button>
+      </form>
+  
+      <!-- Footer -->
+      <div class="form-footer">
+        <p>
+          Already have an account?
+          <a href="#" class="text-decoration-none">Login</a>
+        </p>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,80 @@
+<!-- <button (click)="AddUser()">add user</button> -->
+<div class="container my-5">
+  <!-- <p>name valid: {{nameInput.valid}}</p>
+  <p>name invalid: {{nameInput.invalid}}</p>
+
+   <p>name touched: {{nameInput.touched}}</p>
+  <p>name untouched: {{nameInput.untouched}}</p>
+
+ <p>name dirty: {{nameInput.dirty}}</p>
+  <p>name pristine: {{nameInput.pristine}}</p> -->
+  <!-- ngSubmit 
+ name
+ ngModel-->
+  <form (ngSubmit)="AddUser()" #sigupform="ngForm">
+    <!-- Name Input -->
+    <div class="mb-3">
+      <label for="name" class="form-label">First Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        placeholder="Enter your last name"
+        required
+        minlength="3"
+        name="name"
+        [(ngModel)]="u.name"
+        #nameInput="ngModel"
+        [ngClass]="{
+          'is-invalid': (nameInput.touched || nameInput.dirty) && nameInput.invalid,
+          'is-valid': nameInput.valid
+        }"
+      />
+
+      <div class="invalid-feedback">
+        @if( nameInput.errors?.['required']){
+        <p>name is required</p>
+        }@else if (nameInput.errors?.['minlength']) {
+
+        <p>minlength at least 3 char</p>
+        }
+      </div>
+    </div>
+
+    <!-- Email Input -->
+    <div class="mb-3">
+      <label for="email" class="form-label">Email Address</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        placeholder="Enter your email"
+        required
+      
+        [(ngModel)]="u.email"
+        name="email"
+        #emailInput="ngModel"
+        [ngClass]="{'is-valid':emailInput.valid}"
+      />
+    </div>
+
+    <!-- Password Input -->
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        placeholder="Enter your password"
+        required
+        [(ngModel)]="u.password"
+        name="password"
+      />
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-custom w-100" [disabled]="sigupform.invalid">
+      Submit
+    </button>
+  </form>
+</div>
